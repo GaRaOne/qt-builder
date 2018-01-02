@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  qt:
+    build: 
+      context: .
+      args:
+        - QT:5.10.0
+        - QTM:5.10
+    # volumes:
+    #   - confluenceapp:/opt/atlassian/confluence
