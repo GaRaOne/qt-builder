@@ -36,9 +36,8 @@ RUN apt-get update -q && \
         openssh-client \
         p7zip-full \
         xvfb \
-    && apt-get clean
-
-        # libX11-xcb1 \
+        unzip \
+        wget
 
 # download & install qt
 ADD qt-installer-noninteractive.qs /tmp/qt/script.qs
@@ -53,7 +52,16 @@ RUN chmod +x /tmp/qt/installer.run \
 RUN locale-gen en_US.UTF-8 \
     && dpkg-reconfigure locales
 
-# CLEAN CACHE
-RUN rm -rf /var/lib/apt/lists/*
+###################
+# CLEAN UP
+RUN apt-get clean autoclean \
+    && apt-get autoremove -y \
+    && rm -rf \
+        /var/lib/apt/lists/* \
+        /tmp/* \
+        /var/tmp/* \
+        /var/lib/dpkg/* \
+        /var/lib/cache/* \
+        /var/lib/log/*
 
 CMD ["/bin/bash"]
