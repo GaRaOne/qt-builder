@@ -53,6 +53,10 @@ RUN locale-gen en_US.UTF-8 \
     && dpkg-reconfigure locales
 
 ###################
+# FIREBASE_CPP_SDK
+ADD https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_4.4.0.zip /install/firebase_cpp_sdk.zip
+
+###################
 # CLEAN UP
 RUN apt-get clean autoclean \
     && apt-get autoremove -y
