@@ -19,7 +19,6 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN apt-get update -q && \
     apt-get install -q -y --no-install-recommends \
-        ant \
         build-essential \
         ca-certificates \
         curl \
