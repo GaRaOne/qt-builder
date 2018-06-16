@@ -16,21 +16,8 @@ Controller.prototype.CredentialsPageCallback = function() {
 }
 Controller.prototype.ComponentSelectionPageCallback = function() {
     console.log("Select components");
-    function trim(str) {
-        return str.replace(/^ +/,"").replace(/ *$/,"");
-    }
     var widget = gui.currentPageWidget();
-    var packages = trim("$PACKAGES").split(",");
-    if (packages.length > 0 && packages[0] !== "") {
-        widget.deselectAll();
-        for (var i in packages) {
-            var pkg = trim(packages[i]);
-            console.log("Select " + pkg);
-            widget.selectComponent(pkg);
-        }
-    } else {
-       console.log("Use default component list");
-    }
+    widget.selectAll() 
     gui.clickButton(buttons.NextButton);
 }
 Controller.prototype.IntroductionPageCallback = function() {
