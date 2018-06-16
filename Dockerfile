@@ -10,6 +10,7 @@ ENV QT_PATH /opt/qt
 ENV QT_BASE_DIR=$QT_PATH
 
 ENV QT_ARCH ${QT_PATH}/${QT}/gcc_64
+ENV QT_QPA_PLATFORM=minimal
 ENV LD_LIBRARY_PATH=$QT_PATH/lib/x86_64-linux-gnu:$QT_PATH/lib:$LD_LIBRARY_PATH
 ENV PKG_CONFIG_PATH=$QT_BAQT_PATHSE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
 ENV PATH=${PATH}:${QT_ARCH}/bin
@@ -45,7 +46,7 @@ ADD qt-installer-noninteractive.qs /tmp/qt/script.qs
 ADD http://download.qt.io/official_releases/qt/${QTM}/${QT}/qt-opensource-linux-x64-${QT}.run /tmp/qt/installer.run
 
 RUN chmod +x /tmp/qt/installer.run \
-    && xvfb-run /tmp/qt/installer.run --script /tmp/qt/script.qs \
+    && xvfb-run /tmp/qt/installer.run -v --script /tmp/qt/script.qs \
      | egrep -v '\[[0-9]+\] Warning: (Unsupported screen format)|((QPainter|QWidget))' \
     && rm -rf /tmp/qt
 
