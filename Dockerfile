@@ -61,11 +61,11 @@ ADD https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_5.2.0.zip /install/
 RUN apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf \
-        /var/lib/apt/lists/* \
         /tmp/* \
         /var/tmp/* \
-        /var/lib/dpkg/* \
         /var/lib/cache/* \
         /var/lib/log/*
+        # /var/lib/apt/lists/* \
+        # /var/lib/dpkg/* \
 
 CMD ["/bin/bash"]
