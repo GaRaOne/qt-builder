@@ -2,8 +2,8 @@ FROM ubuntu:18.04
 
 LABEL authors="garaone@co3.de"
 
-ENV QT=5.9.6
-ENV QTM=5.9
+ENV QT=5.11.1
+ENV QTM=5.11
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV QT_PATH /opt/qt
