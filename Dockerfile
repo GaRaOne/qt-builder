@@ -54,18 +54,18 @@ RUN locale-gen en_US.UTF-8 \
 
 ###################
 # FIREBASE_CPP_SDK
-ADD https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_5.0.0.zip /install/firebase_cpp_sdk.zip
+ADD https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_5.2.0.zip /install/
 
 ###################
 # CLEAN UP
 RUN apt-get clean autoclean \
-    && apt-get autoremove -y
-    # && rm -rf \
-    #     /var/lib/apt/lists/* \
-    #     /tmp/* \
-    #     /var/tmp/* \
-    #     /var/lib/dpkg/* \
-    #     /var/lib/cache/* \
-    #     /var/lib/log/*
+    && apt-get autoremove -y \
+    && rm -rf \
+        /var/lib/apt/lists/* \
+        /tmp/* \
+        /var/tmp/* \
+        /var/lib/dpkg/* \
+        /var/lib/cache/* \
+        /var/lib/log/*
 
 CMD ["/bin/bash"]
