@@ -2,8 +2,9 @@ FROM ubuntu:18.04
 
 LABEL authors="garaone@co3.de"
 
-ENV QT=5.11.2
-ENV QTM=5.11
+ENV QT=5.12.0
+ENV QTM=5.12
+ENV FIREBASE_CPP=5.4.3
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV QT_PATH /opt/qt
@@ -54,7 +55,8 @@ RUN locale-gen en_US.UTF-8 \
 
 ###################
 # FIREBASE_CPP_SDK
-ADD https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_5.3.0.zip /install/
+# ADD ./firebase_cpp_sdk_${FIREBASE_CPP}.zip /install/
+ADD https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_${FIREBASE_CPP}.zip /install/
 
 ###################
 # CLEAN UP
