@@ -65,8 +65,8 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh \
         /tmp/* \
         /var/tmp/* \
         /var/lib/cache/* \
-        /var/lib/log/* \
-        /var/lib/apt/lists/* \
-        /var/lib/dpkg/*
+        /var/lib/log/*
+        # /var/lib/apt/lists/* 
+        # /var/lib/dpkg/*
 
 CMD ["/bin/bash"]
