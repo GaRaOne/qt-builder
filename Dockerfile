@@ -16,10 +16,21 @@ ENV LD_LIBRARY_PATH=$QT_PATH/lib/x86_64-linux-gnu:$QT_PATH/lib:$LD_LIBRARY_PATH
 ENV PKG_CONFIG_PATH=$QT_BAQT_PATHSE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
 ENV PATH=${PATH}:${QT_ARCH}/bin
 
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-RUN apt-get update -q && \
-    apt-get install -q -y --no-install-recommends \
+# download QT
+ADD qt-installer-noninteractive.qs /tmp/qt/script.qs
+ADD ./qt-opensource-linux-x64-${QT}.run /tmp/qt/installer.run
+# ADD http://download.qt.io/official_releases/qt/${QTM}/${QT}/qt-opensource-linux-x64-${QT}.run /tmp/qt/installer.run
+
+# download FIREBASE_CPP
+ADD ./firebase_cpp_sdk_${FIREBASE_CPP}.zip /install/
+# ADD https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_${FIREBASE_CPP}.zip /install/
+
+# install
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh \
+    \
+    && apt-get update -q \
+    && apt-get install -q -y --no-install-recommends \
         build-essential \
         ca-certificates \
         curl \
@@ -38,36 +49,24 @@ RUN apt-get update -q && \
         p7zip-full \
         xvfb \
         unzip \
-        wget
-
-# download & install qt
-ADD qt-installer-noninteractive.qs /tmp/qt/script.qs
-# ADD ./qt-opensource-linux-x64-${QT}.run /tmp/qt/installer.run
-ADD http://download.qt.io/official_releases/qt/${QTM}/${QT}/qt-opensource-linux-x64-${QT}.run /tmp/qt/installer.run
-
-RUN chmod +x /tmp/qt/installer.run \
+        wget \
+    \
+    && chmod +x /tmp/qt/installer.run \
     && xvfb-run /tmp/qt/installer.run -v --script /tmp/qt/script.qs \
      | egrep -v '\[[0-9]+\] Warning: (Unsupported screen format)|((QPainter|QWidget))' \
-    && rm -rf /tmp/qt
-
-RUN locale-gen en_US.UTF-8 \
-    && dpkg-reconfigure locales
-
-###################
-# FIREBASE_CPP_SDK
-# ADD ./firebase_cpp_sdk_${FIREBASE_CPP}.zip /install/
-ADD https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_${FIREBASE_CPP}.zip /install/
-
-###################
-# CLEAN UP
-RUN apt-get clean autoclean \
+    && rm -rf /tmp/qt \
+    \
+    && locale-gen en_US.UTF-8 \
+    && dpkg-reconfigure locales \
+    \
+    && apt-get clean autoclean \
     && apt-get autoremove -y \
     && rm -rf \
         /tmp/* \
         /var/tmp/* \
         /var/lib/cache/* \
-        /var/lib/log/*
-        # /var/lib/apt/lists/* \
-        # /var/lib/dpkg/* \
+        /var/lib/log/* \
+        /var/lib/apt/lists/* \
+        /var/lib/dpkg/*
 
 CMD ["/bin/bash"]
