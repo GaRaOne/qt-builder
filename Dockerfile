@@ -19,12 +19,12 @@ ENV PATH=${PATH}:${QT_ARCH}/bin
 
 # download QT
 ADD qt-installer-noninteractive.qs /tmp/qt/script.qs
-ADD ./qt-opensource-linux-x64-${QT}.run /tmp/qt/installer.run
-# ADD http://download.qt.io/official_releases/qt/${QTM}/${QT}/qt-opensource-linux-x64-${QT}.run /tmp/qt/installer.run
+# ADD ./qt-opensource-linux-x64-${QT}.run /tmp/qt/installer.run
+ADD http://download.qt.io/official_releases/qt/${QTM}/${QT}/qt-opensource-linux-x64-${QT}.run /tmp/qt/installer.run
 
 # download FIREBASE_CPP
-ADD ./firebase_cpp_sdk_${FIREBASE_CPP}.zip /install/
-# ADD https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_${FIREBASE_CPP}.zip /install/
+# ADD ./firebase_cpp_sdk_${FIREBASE_CPP}.zip /install/
+ADD https://dl.google.com/firebase/sdk/cpp/firebase_cpp_sdk_${FIREBASE_CPP}.zip /install/
 
 # install
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh \
