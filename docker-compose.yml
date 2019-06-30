@@ -4,8 +4,3 @@ services:
   qt:
     build: 
       context: .
-      args:
-        - QT:5.9.6
-        - QTM:5.9
-    # volumes:
-    #   - confluenceapp:/opt/atlassian/confluence
