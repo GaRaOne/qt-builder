@@ -2,9 +2,9 @@ FROM ubuntu:18.04
 
 LABEL authors="garaone@co3.de"
 
-ENV QT=5.12.4
+ENV QT=5.12.6
 ENV QTM=5.12
-ENV FIREBASE_CPP=6.4.0
+ENV FIREBASE_CPP=6.8.0
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV QT_PATH /opt/qt
